@@ -1,0 +1,33 @@
+.container{
+    text-align: center;
+}
+
+body{
+	background-color: black;
+}
+
+table{
+    margin:auto;
+}
+
+input{
+    font-size: 25px;
+    width: 210px;
+    height: 50px;
+}
+
+button{
+    font-size: 25px;
+    width: 70px;
+    height: 50px;
+}
+
+.operator {
+    padding: 10px;
+    background-color: rgb(170, 0, 37);
+}
+
+.number {
+    padding: 10px;
+    background-color:rgb(255, 217, 0);
+}
