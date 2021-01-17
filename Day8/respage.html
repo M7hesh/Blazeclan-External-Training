@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="getBtn" onclick="getData()">Get</button>
+    <br><br>
+    Results
+    <table id="table2" style="border: double;">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+        </tr>
+    </table>
+
+
+    <script>
+        function getData() {
+            let xhr = new XMLHttpRequest();
+            let receivedData;
+
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    console.log(`In onload ${JSON.parse(xhr.response)}`);
+                    receivedData = JSON.parse(xhr.response);
+                    let receivedData1 = xhr.response;
+                    console.log(receivedData1);
+                    console.log(receivedData);
+
+                    var table = document.getElementById("table2");
+                    while (true){
+                        if(table.rows.length == 1){ 
+                            break; }
+                        table.deleteRow(-1);
+                    }
+
+                    for (let x = 0; x < receivedData.length; x++) {
+                        let row = table.insertRow(-1);
+
+                        //let y = x.toString();
+
+                        var cell1 = row.insertCell(0);
+                        var cell2 = row.insertCell(1);
+
+                        cell1.innerHTML = receivedData[x]["Id"];
+                        cell2.innerHTML = receivedData[x]["Name"];           
+                    }
+                }
+                else{
+                    console.log("Error occured whie sending GET request");
+                }
+            };
+            xhr.onerror = function(){
+                console.log("Some error occured");
+            };
+            xhr.open('GET', 'http://localhost:3001/respageGET');
+            xhr.send();
+        }
+    </script>
+</body>
+
+</html>

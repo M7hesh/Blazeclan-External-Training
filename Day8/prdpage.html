@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Page Returned by Making a Http Call to Node.js</title>
+    <style type="text/css">
+        table,
+        td {
+            border: double;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to Product Information Page</h1>
+    <form method="post">
+        <table>
+            <tr>
+                <td>Product Id:</td>
+                <td>
+                    <input type="number" name="pid" id="pid" />
+                </td>
+            </tr>
+            <tr>
+                <td>Product Name:</td>
+                <td>
+                    <input type="text" name="pname" id="pname" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+    <button id="Btn">Submit</button>
+
+    <script>
+        document.getElementById('Btn').addEventListener('click', function (){
+            alert("Submit");
+
+            let pId = document.getElementById("pid").value;
+            let pName = document.getElementById("pname").value;
+
+            let sudoPrd = {};
+
+            sudoPrd["productId"] = pId;
+            sudoPrd["productName"] = pName;
+
+            console.log(`From prdpage.html: ${JSON.stringify(sudoPrd)}`);
+
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    console.log('200: Successful from prdpage.html');
+                }
+                else {
+                    console.log('Unsuccessful from prdpage.html');
+                }
+            }
+            xhr.onerror = function () {
+                // reject if there is different status code
+                console.log('Some Error Occured with Http Communication');
+            };
+            
+            xhr.open('POST','http://localhost:3001');
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(JSON.stringify(sudoPrd));
+        }, false);
+
+    </script>
+
+</body>
+
+</html>
