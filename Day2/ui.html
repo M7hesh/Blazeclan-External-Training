@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td,
+        th {
+            border: double;
+        }
+    </style>
+    <script src="./logic.js"></script>
+    <script>
+        window.onload = function () {
+            var logic = new appLogic(); // instance
+
+            var options = '';
+            for (var i = 0; i < logic.categories.length; i++) {
+                options += '<option value="' + logic.categories[i] + '">' + logic.categories[i] + '</option>'
+            }
+
+            document.getElementById('categoryname').innerHTML = options;
+
+            var products = logic.getProducts();
+
+            generateTable(products);
+
+            function generateTable(products) {
+
+                var headers = '';
+                // read the 0th record fro the array
+                var prd = products[0];
+                var columns = [];
+
+                // read all keys of 0th index
+                //for(var c in prd){
+                //    columns.push(c);
+                // }
+
+                columns = Object.keys(prd);
+                var row = '<tr>';
+                 for (var c in columns) {
+                     headers += '<th>' + columns[c] + '</th>';
+                 }
+               
+                row += headers + '</tr>';
+
+                document.getElementById('thead').innerHTML = row;
+                var tr = ''
+                //     for(var r=0; r<products.length;r++){
+                //         tr+='<tr><td>' + products[r].ProductId + '</td><td>' +products[r].ProductName+'</td><td>' +products[r].CategoryName+'</td><td>' +products[r].Price+'</td><tr>';
+                //     }
+                //     document.getElementById('tbody').innerHTML = tr;
+                // }
+                for (var product of products) {
+                    tr += "<tr>";
+                    for (var r of columns) {
+                        tr += "<td>" + product[r] + "</td>";
+                    }
+                    tr += "<tr>";
+                }
+                document.getElementById("tbody").innerHTML = tr;
+            }
+
+            document.getElementById('clear').addEventListener('click', function () {
+                var inputs = document.getElementsByClassName('c1');
+                for (var i in inputs) {
+                    inputs[i].value = '';
+                    // document.getElementById('dvValidations').innerHTML = ' ';
+                }
+                document.getElementById("save").value = "Save";
+                document.getElementById("productid").style.backgroundColor = null; //clear red backgroud after clearing
+                document.getElementById("save").disabled = false;
+                document.getElementById("dvValidations").innerHTML = "";
+            }, false);
+
+            document.getElementById('save').addEventListener('click', function () {
+                // define an object literal
+                var prd = {};
+                prd.ProductId = document.getElementById('productid').value;
+                prd.ProductName = document.getElementById('productname').value;
+                prd.CategoryName = document.getElementById('categoryname').value;
+                prd.Price = document.getElementById('price').value;
+
+                if (this.value == "Save") {
+                    products = logic.addProduct(prd);
+                }
+                if (this.value == "Update") {
+                    products = logic.updateProduct(prd);
+                }
+                generateTable(products);
+            }, false);
+
+
+            document.getElementById('productid').addEventListener('change', function () {
+                var id = parseInt(this.value);
+
+                if ((id < 0) || (!id)) {       // (!id) doesn't work here so re-validated in addProduct()
+                    document.getElementById("save").disabled = true;
+                    this.style.backgroundColor = 'red';
+                    document.getElementById('dvValidations').innerHTML += 'Invalid Product Id';
+                }
+                else {
+                    document.getElementById('dvValidations').innerHTML += '';
+                    document.getElementById("save").disabled = false;
+                    this.style.backgroundColor = null;
+                    for (let product of products) {
+                        if (id == product.ProductId) {
+                            document.getElementById("productname").value = product.ProductName;
+                            document.getElementById("categoryname").value = product.CategoryName;
+                            document.getElementById("price").value = product.Price;
+                            document.getElementById("save").value = "Update";
+                            break;
+                        }
+                    }
+                }
+            }, false);
+                    
+            //     document.getElementById('price').addEventListener('change', function () {
+            //         var pp = parseInt(this.value);
+            //         var cc = document.getElementById("categoryName").value;
+            //         console.log(`${cc}`);
+            //         if ((pp < 0) || (!pp)) {
+            //             this.style.backgroundColor = 'red';
+            //             document.getElementById('dvValidations').innerHTML += 'Invalid Price ';
+            //         }
+            //         else {
+            //             this.style.backgroundColor = null;
+            //             document.getElementById('dvValidations').innerHTML = ' ';
+
+            //             if ((prd.CategoryName == 'ECT') && (pp < 1000)) {
+            //                 document.getElementById('dvValidations').innerHTML += ' Enter Price above 1000. ';
+            //             }
+            //             else if ((prd.CategoryName == 'ECL') && (pp < 20)) {
+            //                 if (pp < 20) {
+            //                     document.getElementById('dvValidations').innerHTML += ' Enter Price above 20. ';
+            //                 }
+            //             }
+            //             else if ((prd.CategoryName == 'FOD') && (pp < 10)) {
+            //                 document.getElementById('dvValidations').innerHTML += ' Enter Price above 10. ';
+            //             }
+            //             else {
+            //                 document.getElementById('dvValidations').innerHTML = '';
+            //             }
+            //         }
+            //     }, false);
+        }
+    </script>
+</head>
+
+<body>
+    <h1>The JavaScript Application</h1>
+    <div id="dvValidations"></div>
+    <table style="border: double;">
+        <tbody>
+            <tr>
+                <td>Product Id</td>
+                <td>
+                    <input type="text" id="productid" class="c1">
+                </td>
+            </tr>
+            <tr>
+                <td>Product Name</td>
+                <td>
+                    <input type="text" id="productname" class="c1">
+                </td>
+            </tr>
+            <tr>
+                <td>Category Name</td>
+                <td>
+                    <select type="text" id="categoryname"></select>
+                </td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>
+                    <input type="text" id="price" class="c1">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" value="Clear" id="clear">
+                </td>
+                <td>
+                    <input type="button" value="Save" id="save">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <table style="border: double;">
+        <thead id="thead">
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+</body>
+
+</html>

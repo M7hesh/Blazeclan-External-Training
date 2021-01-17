@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+</head>
+
+<body>
+    <h4>Enter String</h4>
+    <input type="text" name="txt" id="txt" size="100">
+    <br><br>
+    <button id="Btn" onclick="titlecase()">Title Case</button>
+    <p id="first"> </p>
+    <br>
+    <button id="Btn" onclick="firstupr()">Uppercase</button>
+    <p id="second"> </p>
+    <br>
+    <button id="Btn" onclick="revword()">Reverse</button>
+    <p id="third"> </p>
+    <br>
+    <button id="Btn" onclick="spacedash()">Replace</button>
+    <p id="fourth"> </p>
+    <br>
+    <button id="Btn" onclick="findai()">A & I Words</button>
+    <p id="fifth"> </p>
+    <br>
+
+
+    <script>
+
+        //var str = document.getElementById("txt").value;
+
+        // function spacedash(str) {
+        //     str = str.replace(" ", "_");
+        //     str = str.replace(/\s+/g, '_');
+        // }
+
+        function spacedash() {
+            var str = document.getElementById("txt").value;
+            var sd = "";
+            for (var s = 0; s < str.length; s++) {
+                if (str.charAt(s) == " ") {
+                    sd += "_";
+                }
+                sd += str.charAt(s);
+            }
+            document.getElementById("fourth").innerHTML = sd;
+        }
+
+        // function revstr(str) {
+        //     var newrevstr = "";
+        //     for (var rs = str.length - 1; rs >= 0; rs--) {
+        //         newrevstr += str[rs];
+        //     }
+        //     return newrevstr;
+        // }
+
+        function revword() {
+            var str4 = document.getElementById("txt").value;
+            var rw = str4.split(' ');
+            var res = "";
+
+            for (var r = 0; r < rw.length; r++) {
+                res = res + reverseStr(rw[r]) + " ";
+            }
+            document.getElementById("third").innerHTML = res;
+        }
+        
+        function reverseStr(str) {
+            var sr = "";
+            for (var s = str.length - 1; s >= 0; s--) {
+                sr = sr + str[s];
+            }
+            return sr;
+        }
+
+        // function revword() {
+        //     var str3 = document.getElementById("txt").value;
+        //     var rw = "";
+        //     var rwarr = [];
+        //     for (var rs = str3.length - 1; rs >= 0; rs--) {
+        //         rwarr.push[rw[rs]];
+        //     }
+        //     rw = rwarr.join("");
+        //     document.getElementById("third").innerHTML = rw;
+        // }
+
+        function firstupr() {
+            var str2 = document.getElementById("txt").value;
+            var fu = str2.split('. ');
+
+            for (var i = 0; i < fu.length; i++) {
+                fu[i] = fu[i].charAt(0).toUpperCase() + fu[i].slice(1);
+            }
+            var res = fu.join('. ');
+            document.getElementById("second").innerHTML = res;
+        }
+
+        // function firstUpper(val) {
+        //     var splitStr = val.split('.');
+
+        //     for (var i = 0; i < splitStr.length; i++) {
+        //         splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+        //     }
+
+        //     var res = splitStr.join('.');
+
+        //     document.getElementById("t0").innerHTML = res;
+
+        // }
+
+        function findai() {
+            var str5 = document.getElementById("txt").value;
+            var res = "";
+            var fa = str5.split(' ');
+
+            for (var f = 0; f < fa.length; f++) {
+                if (fa[f].includes("i") || fa[f].includes("I") || fa[f].includes("a") || fa[f].includes("A")) {
+                    res = res + fa[f] + " ";
+                }
+            }
+            document.getElementById("fifth").innerHTML = res;
+        }
+
+        function titlecase(str) {
+            var str = document.getElementById("txt").value;
+            var str1 = str.toLowerCase().split(' ');
+            for (var t = 0; t < str1.length; t++) {
+                str1[t] = str1[t].charAt(0).toUpperCase() + str1[t].slice(1);
+            }
+            var res = str1.join(' ');
+            document.getElementById("first").innerHTML = res;
+        }
+    </script>
+</body>
+
+</html>
