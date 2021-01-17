@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+    <h1>The Home Page Rendered using Express.js App</h1>
+    <input type="button" value="Click Me" id="btn">
+    <a href="/">Back to Index</a>
+
+    <script>
+        document.getElementById("btn").addEventListener('click',function(){
+            var xhr = new XMLHttpRequest();
+
+            xhr.onload = function(){
+                 
+                if(xhr.status== 200) {
+                    console.log(`In onload ${xhr.response}`); 
+                } 
+            };
+        
+          
+            xhr.onerror = function(){
+                 
+                 console.log('Some Error Occured with Http Communication');
+            };
+
+            xhr.open("GET","http://localhost:9090/api/employees");
+            console.log(btoa("mahesh:mahesh"));
+            xhr.setRequestHeader("Authorization", "basic mahesh:mahesh");
+            
+            xhr.send();
+        });
+</script>
+</body>
+</html>
