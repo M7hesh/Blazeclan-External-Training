@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Day 3</h3>
+    <div id="dvValidations"></div>
+    <hr>
+    <table>
+        <tbody>
+            <tr>
+                <td>Id</td>
+                <td>
+                    <input type="text" id="productid" class="c1">
+                </td>
+            </tr>
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" id="productname" class="c1">
+                </td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td>
+                    <input type="text" id="price" class="c1">
+                </td>
+            </tr>
+            <tr>
+                <td>Manufacturer</td>
+                <td>
+                    <input type="text" id="manufacturer" class="c1">
+                </td>
+            </tr>
+            <tr>
+                <td>Category Name</td>
+                <td>
+                    <select id="categoryname">
+                        <option selected disabled>Select</option>
+                        <option value=ECT>ECT</option>
+                        <option value=ECL>ECL</option>
+                        <option value=FOD>FOD</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" value="Clear" id="clear">
+                </td>
+                <td>
+                    <input type="button" value="Save" id="save">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+
+    <table style="border: double;" id="table2">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Manufacturer</th>
+        </tr>
+    </table>
+    <hr>
+
+    Select Filter Property<br>
+    <select type="text" id="propertyname">
+        <option selected disabled>Select</option>
+        <option>Id</option>
+        <option>Name</option>
+        <option>Category</option>
+        <option>Price</option>
+        <option>Manufacturer</option>
+    </select>
+
+    <input type="text" id="searchtext">
+    <button onclick="filterRecords();">Filter</button><br>
+
+    <br>Filtered Results<br>
+    <table id="table3" style="border: double;">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Manufacturer</th>
+        </tr>
+    </table>
+    <hr>
+
+    Select Sort Property<br>
+    <select type="text" id="sortpropertyname">
+        <option selected disabled>Select</option>
+        <option>Id</option>
+        <option>Name</option>
+        <option>Category</option>
+        <option>Price</option>
+        <option>Manufacturer</option>
+    </select>
+
+    <b>Sort</b>
+    <input type="radio" onclick="ascSort1(true);" name="sortRadio">
+    <b>Reverse</b>
+    <input type="radio" onclick="ascSort1(false);" name="sortRadio">
+    <br><br>
+    Sorted Results
+    <table id="table4" style="border: double;">
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Manufacturer</th>
+        </tr>
+    </table>
+    <script src="dd3.js"></script>
+</body>
+
+</html>
