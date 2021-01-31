@@ -1,5 +1,19 @@
 Use Company
  /* Create a new Table*/
+
+Create Table Users(
+  Id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
+  UserName VARCHAR(50) NOT NULL,
+  Passwords VARCHAR(255) NOT NULL,
+  Email VARCHAR(100) NOT NULL
+)
+
+INSERT INTO Users values
+(1, 'mahesh', 'mahesh', 'mahesh@mail.com'),
+(2, 'suresh', 'suresh', 'suresh@mail.com'),
+(3, 'ramesh', 'ramesh', 'ramesh@mail.com')
+
+
 Create Table Department (
   DeptNo int Primary Key,
   DeptName varchar(200) not null,
@@ -17,7 +31,6 @@ Insert into Department Values(40, 'ACCOUNTS', 'Pune',20)
 Insert into Department Values(50, 'SALES', 'Pune',70)
 
 Select * from Department
-
 
 Create Table Employee (
   EmpNo int Primary Key,
