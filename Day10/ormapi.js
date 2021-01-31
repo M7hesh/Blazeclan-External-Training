@@ -1,4 +1,4 @@
-  
+ 
 // @ts-nocheck
 let express  =require('express');
 let bodyParser = require('body-parser');
@@ -239,7 +239,7 @@ instance.post("/api/employees", (req,resp)=> {
     .then(()=>
         // create a record and return the commited record from database to API
         {
-            return dept.create(newEmp);
+            return emp.create(newEmp);
         } 
       ).then((data)=>{
         resp.json({ statusCode: 200, data: data });
@@ -274,7 +274,7 @@ instance.delete("/api/employees/:id",(req,resp)=>{
             force: false // default is true to create a table
         })
         .then(() =>
-           dept.destroy({where:{EmpNo:id}})
+           emp.destroy({where:{EmpNo:id}})
         )
         .then((data) => {
             resp.json({ statusCode: 200, data: data })
@@ -284,7 +284,6 @@ instance.delete("/api/employees/:id",(req,resp)=>{
 });
 
 // start listening
-
 instance.listen(9090, ()=>{
     console.log('REST API is listening on port 9090');
 });
